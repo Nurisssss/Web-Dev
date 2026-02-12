@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My to-do list 🗓️</title>
+  <style>
+    body {
+      font-family: 'Comic Sans MS', cursive;
+      background: linear-gradient(to bottom right, #d1f3ff, #c4dadf);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .container {
+      background: #fff;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      border-radius: 12px;
+      padding: 20px;
+      width: 300px;
+      text-align: center;
+    }
+    h1 {
+      color: #5facc8;
+      font-size: 2em;
+      margin-bottom: 10px;
+    }
+    input[type="text"] {
+      width: 80%;
+      padding: 8px;
+      border: 2px solid #5facc8;
+      border-radius: 8px;
+      outline: none;
+      margin-bottom: 10px;
+      font-size: 1em;
+    }
+    button {
+      background: #33aaac;
+      color: white;
+      padding: 8px 16px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 1em;
+    }
+    button:hover {
+      background: #4f9dd1;
+    }
+    ul {
+      list-style: none;
+      padding: 0;
+    }
+    li {
+      background: #ffe4e1;
+      margin: 5px 0;
+      padding: 10px;
+      border-radius: 8px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 1em;
+    }
+    li.done {
+      text-decoration: line-through;
+      opacity: 0.6;
+    }
+    .delete {
+      background: #ff6b6b;
+      color: white;
+      border: none;
+      border-radius: 50%;
+      font-size: 0.9em;
+      width: 24px;
+      height: 24px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🗓️ My To-Do List</h1>
+    <input type="text" id="taskInput" placeholder="Add a new task...">
+    <button onclick="addTask()">Add</button>
+    <ul id="taskList"></ul>
+  </div>
+
+  <script>
+    function addTask() {
+      const taskInput = document.getElementById('taskInput');
+      const taskList = document.getElementById('taskList');
+      const taskText = taskInput.value.trim();
+      
+      if (taskText === '') {
+        alert('Please enter a task!');
+        return;
+      }
+
+      const li = document.createElement('li');
+      li.innerHTML = `
+        <span>${taskText}</span>
+        <input type="checkbox" onclick="toggleDone(this)">
+        <button class="delete" onclick="deleteTask(this)">✕</button>
+      `;
+      taskList.appendChild(li);
+      taskInput.value = '';
+    }
+
+    function toggleDone(checkbox) {
+      const li = checkbox.parentElement;
+      li.classList.toggle('done');
+    }
+
+    function deleteTask(button) {
+      const li = button.parentElement;
+      li.remove();
+    }
+  </script>
+</body>
+</html>
